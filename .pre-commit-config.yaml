@@ -1,0 +1,52 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: trailing-whitespace
+        language_version: python3
+      - id: end-of-file-fixer
+      - id: debug-statements
+        language_version: python3
+
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.0.1
+    hooks:
+      - id: reorder-python-imports
+        language_version: python3
+  - repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+      - id: black
+        args:
+        - --safe
+        - --quiet
+        language_version: python3
+        require_serial: true
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.32.0
+    hooks:
+      - id: pyupgrade
+        language_version: python3
+
+  # E0401 - import errors (Used when pylint has been unable to import a module.)
+  # C0411 - wrong-import-order, disabled because of conflicts with black
+  # W1203, W1201 - Use %s formatting in logging functions (Read more: https://github.com/PyCQA/pylint/issues/2354)
+  # W0603 - Using the global statement
+  # C0114,C0115,C0116 - docstring checks. Disabled because of pydocstyle checks
+  # W0107 - unnecessary pass
+  # W0702: No exception type(s) specified (bare-except)
+  # R0801: Similar lines in 2 files. Disabled because it flags any file even those which are unrelated
+  # R1705: Unnecessary "elif" after "return", remove the leading "el" from "elif" (no-else-return)
+  # R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.17.4
+    hooks:
+      - id: pylint
+        exclude: ^tests/
+        args:
+          - --max-line-length=120
+          - --min-public-methods=0
+          - --good-names=q,f,fp,i,e
+          - --disable=E0401,W1201,W1203,C0114,C0115,C0116,C0411,W0107,W0702,R0801,R1705,R1710
+        language_version: python3
