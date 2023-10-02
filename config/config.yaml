@@ -14,11 +14,19 @@ config:
 
 # `application` contains data related to the application, not to the scans.
 application:
-  shortName: "MyApp-1.0"
-  url: "<Mandatory. root URL of the application>"
+  shortName: "petstore"
+  url: "https://petstore.swagger.io"
 
 # `general` is a section that will be applied to all scanners.
 general:
+
+  # See the config-template-long.yaml for more authentication options
+  authentication:
+    type: http_basic
+    parameters:
+      username: "user"
+      password: "mypassw0rd"
+
   container:
     # This configures what technology is to be used for RapiDAST to run each scanner.
     # Currently supported: `podman`, `flatpak` and `none`
