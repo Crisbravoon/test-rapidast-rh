@@ -34,7 +34,7 @@ scanners:
   zap:
     apiScan:
       apis:
-        apiUrl: "<URL to openAPI>"
+        apiUrl: "https://petstore.swagger.io/v2/swagger.json"
         # alternative: apiFile: "<local path to openAPI file>"
 
     passiveScan:
